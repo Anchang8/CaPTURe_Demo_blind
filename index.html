@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="CaPTURe: Cartoon Pose Transfer Using Reverse Attention.">
+  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CaPTURe: Cartoon Pose Transfer Using Reverse Attention</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://anchang8.github.io">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+      <!--
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://anchang8.github.io">
+            Vertebral landmark detection
+          </a>
+        </div>
+      </div>
+      -->
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">CaPTURe: Cartoon Pose Transfer Using Reverse Attention</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://anchang8.github.io">Chang-Hyeon An</a><sup>1</sup> and</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=uX_-KBcAAAAJ&hl=en">Hyun-Chul Choi</a><sup>1</sup>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>ICVSLab, Yeungnam University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://www.sciencedirect.com/science/article/abs/pii/S0925231223007427?via%3Dihub"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/Anchang8/CaPTURe"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <center>
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/CaPTURE_Demo1.mp4"
+                type="video/mp4">
+      </video>
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/CaPTURE_Demo2.mp4"
+                type="video/mp4">
+      </video>
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/CaPTURE_Demo3.mp4"
+                type="video/mp4">
+      </video>
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/CaPTURE_Demo4.mp4"
+                type="video/mp4">
+      </video>
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/CaPTURE_Demo5.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">CaPTURe</span> transfers the target pose (2nd column) to the target identity (1st column) as shown in the 3rd column.
+      </h2>
+    </div>
+    </center>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Most of the previous pose transfer methods require additional input data such as joint keypoints of the target pose extracted by a pre-trained network in a human domain.
+            However, in the fields where cartoon characters are used, such as animation or webtoons, the body proportions and structures of the characters often deviate from those of real-life humans. Therefore, it is not appropriate to utilize a pre-trained network designed for the human domain to extract additional data from these cartoon characters. Even if the network is newly trained in the cartoon domain, expensive data labeling is necessary.
+            As a result, most of the previous pose transfer methods are not suitable for application in the cartoon domain. 
+          </p>
+          <p>
+            To address these issues, we propose a cartoon pose transfer network named CaPTURe that can successfully perform pose transfer in the cartoon domain with only target images and no other input data. Here, we incorporate the attention mechanism to accurately generate the desired identity. Additionally, we employ reverse attention to enhance the precision of generating the target pose. This approach eliminates the influence of identity information in the pose feature, enabling our network to focus solely on utilizing pose information.
+          </p>
+          <p>
+            Consequently, through comparative experiments using a cartoon domain dataset, CaPTURe shows significant improvements in quantitative results. Specifically, it achieves a 4.7% reduction in L1 Distance, a 0.1% improvement in SSIM, and a 0.8% enhancement in LPIPS. Moreover, CaPTURe exhibits superior qualitative performance than the previous state-of-the-art methods.
+          </p>
+          <p>
+            In addition, we demonstrate that CaPTURe is capable of achieving effective pose transfer not just in the cartoon domains, but also in the human domains, as evidenced by our experiments on a human domain dataset.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<center>
+<h2 class="title is-3">Methodology</h2>
+<div style="max-width: 700px; overflow: hidden; display: inline-block">
+  <img src="./static/images/CaPTURe.png" style="width: 100%; max-height: auto">
+</div>
+<br>
+<div style="max-width: 700px; overflow: hidden; display: inline-block">
+  <img src="./static/images/attnDec.png" style="width: 100%; max-height: auto">
+</div>
+</center>
+
+<br>
+<br>
+
+<center>
+  <h2 class="title is-3">Comparison with the State-of-the-Art methods</h2>
+  <div style="max-width: 700px; overflow: hidden; display: inline-block">
+    <img src="./static/images/qualitative_comparison.png" style="width: 100%; max-height: auto">
+  </div>
+  <div class="content has-text-justified">
+    <p>
+      C
+    </p>
+  </div>
+  <br>
+  <div style="max-width: 500px; overflow: hidden; display: inline-block">
+    <img src="./static/images/quantitative_comparison.png" style="width: 100%; max-height: auto">
+  </div>
+  <br>
+  <div style="max-width: 500px; overflow: hidden; display: inline-block">
+    <img src="./static/images/Inference_time.png" style="width: 100%; max-height: auto">
+  </div>
+  <br>
+  
+  <h2 class="title is-3">Inference result with human domain dataset</h2>
+  <div style="max-width: 500px; overflow: hidden; display: inline-block">
+    <img src="./static/images/qualitative_result_Fashion.png" style="width: 100%; max-height: auto">
+  </div>
+  </center>
+
+  <!-- Concurrent Work. -->
+<div class="columns is-centered">
+  <div class="column is-four-fifths">
+    <h2 class="title is-3">References</h2>
+    <div class="content has-text-justified">
+      <p>
+        Liu, W., Piao, Z., Min, J., Luo, W., Ma, L., Gao, S., 2019b. Liquid warping gan: A unified framework for human motion imitation, appearance transfer and novel view synthesis, in: Proceedings of the IEEE/CVF International Conference on Computer Vision, pp. 5904–5913.
+      </p>
+      <p>
+        Siarohin, A., Lathuilière, S., Tulyakov, S., Ricci, E., Sebe, N., 2019b. First order motion model for image animation. Advances in Neural Information Processing Systems 32.
+      </p>
+      <p>
+        Siarohin, A., Woodford, O.J., Ren, J., Chai, M., Tulyakov, S., 2021. Motion representations for articulated animation, in: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pp. 13653–13662
+      </p>
+      <p>
+        Zhang, R., Isola, P., Efros, A.A., Shechtman, E., Wang, O., 2018. The unreasonable effectiveness of deep features as a perceptual metric, in: Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 586–595.
+      </p>
+      <p>
+        Heusel, M., Ramsauer, H., Unterthiner, T., Nessler, B., Hochreiter, S., 2017. Gans trained by a two time-scale update rule converge to a local nash equilibrium. Advances in neural information processing systems 30.
+      </p>
+    </div>
+  </div>
+</div>
+<!--/ Concurrent Work. -->
+
+  </div>
+</section>
+
+<!--
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{an2023capture,
+  author    = {Chang-Hyeon An and Hyun-Chul Choi.},
+  title     = {CaPTURe: Cartoon Pose Transfer Using Reverse Attention},
+  journal   = {Neurocomputing},
+  year      = {2023},
+}</code></pre>
+  </div>
+</section>
+-->
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
